@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:task_manager_app/ui/pages/add_new_task_screen.dart';
 
 import '../../utils/appbar_widget.dart';
+import 'cancel_task_screen.dart';
+import 'complete_task_screen.dart';
+import 'new_task_screen.dart';
+import 'progress_task_screen.dart';
 
 class NavigationBarScreen extends StatefulWidget {
   const NavigationBarScreen({super.key});
@@ -13,10 +17,19 @@ class NavigationBarScreen extends StatefulWidget {
 
 class _NavigationBarScreenState extends State<NavigationBarScreen> {
   int selectedIndex = 0;
+
+  List<Widget> screens = [
+    NewTaskScreen(),
+    CompleteTaskScreen(),
+    CancelTaskScreen(),
+    ProgressTaskScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppbarWidget(),
+      body: screens[selectedIndex],
       bottomNavigationBar: NavigationBar(
         labelPadding: EdgeInsets.zero,
         onDestinationSelected: (int index) {
