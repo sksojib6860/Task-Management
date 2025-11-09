@@ -1,7 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:task_manager_app/ui/pages/reset_password.dart';
+import 'package:task_manager_app/ui/pages/set_password_screen.dart';
+import 'package:task_manager_app/ui/pages/signIn_screen.dart';
 import 'package:task_manager_app/utils/sceen_background.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
@@ -56,7 +57,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               ),
 
               const SizedBox(height: 8),
-              FilledButton(onPressed: onTapSignIn, child: Text('Verify')),
+              FilledButton(onPressed: verifyOtp, child: Text('Verify')),
               const SizedBox(height: 8),
               Center(
                 child: RichText(
@@ -80,9 +81,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     );
   }
 
-  void onTapSignUp() {}
-
   void onTapSignIn() {
-    Navigator.pushNamed(context, ResetPassword.name);
+    Navigator.pushNamed(context, SigninScreen.name);
+  }
+
+  void verifyOtp() {
+    Navigator.pushNamed(context, SetPassword.name);
   }
 }

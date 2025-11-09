@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/ui/pages/forgot_password.dart';
 import 'package:task_manager_app/ui/pages/signUp_screen.dart';
+import 'package:task_manager_app/ui/pages/top_nav_bar_screen.dart';
 import 'package:task_manager_app/utils/sceen_background.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -79,5 +80,11 @@ class _SigninScreenState extends State<SigninScreen> {
     Navigator.pushNamed(context, SignupScreen.name);
   }
 
-  void onTapSignIn() {}
+  void onTapSignIn() {
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      NavigationBarScreen.name,
+      (predicate) => false,
+    );
+  }
 }

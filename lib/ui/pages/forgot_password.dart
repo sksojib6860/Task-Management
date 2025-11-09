@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/ui/pages/otp_verification_screen.dart';
+import 'package:task_manager_app/ui/pages/signIn_screen.dart';
 import 'package:task_manager_app/utils/sceen_background.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -36,7 +37,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               TextField(decoration: InputDecoration(hintText: 'Email')),
               const SizedBox(height: 8),
               FilledButton(
-                onPressed: onTapSignIn,
+                onPressed: submitButton,
                 child: Icon(Icons.arrow_circle_right_outlined),
               ),
               const SizedBox(height: 8),
@@ -63,6 +64,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   }
 
   void onTapSignIn() {
+    Navigator.pushNamed(context, SigninScreen.name);
+  }
+
+  void submitButton() {
     Navigator.pushNamed(context, OtpVerificationScreen.name);
   }
 }
