@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager_app/ui/pages/signIn_screen.dart';
-import 'package:task_manager_app/utils/sceen_background.dart';
+import 'package:task_manager_app/ui/widgets/sceen_background.dart';
 
 class SetPassword extends StatefulWidget {
   const SetPassword({super.key});

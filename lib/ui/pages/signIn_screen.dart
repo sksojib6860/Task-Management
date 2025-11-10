@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:task_manager_app/ui/pages/forgot_password.dart';
 import 'package:task_manager_app/ui/pages/signUp_screen.dart';
 import 'package:task_manager_app/ui/pages/top_nav_bar_screen.dart';
-import 'package:task_manager_app/utils/sceen_background.dart';
+import 'package:task_manager_app/ui/widgets/sceen_background.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager_app/utils/appbar_widget.dart';
-import 'package:task_manager_app/utils/sceen_background.dart';
+import 'package:task_manager_app/ui/widgets/appbar_widget.dart';
+import 'package:task_manager_app/ui/widgets/sceen_background.dart';
 
 class AddNewTaskScreen extends StatelessWidget {
   const AddNewTaskScreen({super.key});

@@ -5,6 +5,7 @@ import 'package:task_manager_app/ui/pages/otp_verification_screen.dart';
 import 'package:task_manager_app/ui/pages/set_password_screen.dart';
 import 'package:task_manager_app/ui/pages/signUp_screen.dart';
 import 'package:task_manager_app/ui/pages/top_nav_bar_screen.dart';
+import 'package:task_manager_app/ui/pages/update_profile_screen.dart';
 
 import 'ui/pages/signIn_screen.dart';
 import 'ui/pages/splash_screen.dart';
@@ -16,6 +17,7 @@ class TaskManagerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.green.shade50,
         colorSchemeSeed: Colors.green,
         inputDecorationTheme: InputDecorationThemeData(
           contentPadding: EdgeInsets.symmetric(vertical: 16),
@@ -80,6 +82,7 @@ class TaskManagerApp extends StatelessWidget {
         SetPassword.name: (context) => SetPassword(),
         NavigationBarScreen.name: (context) => NavigationBarScreen(),
         AddNewTaskScreen.name: (context) => AddNewTaskScreen(),
+        UpdateProfileScreen.name: (context) => UpdateProfileScreen(),
       },
     );
   }

@@ -1,40 +1,5 @@
 import 'package:flutter/material.dart';
 
-class CompleteTaskScreen extends StatefulWidget {
-  const CompleteTaskScreen({super.key});
-
-  @override
-  State<CompleteTaskScreen> createState() => _CompleteTaskScreenState();
-}
-
-class _CompleteTaskScreenState extends State<CompleteTaskScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListView.separated(
-                shrinkWrap: true,
-                primary: false,
-                itemBuilder: (context, index) {
-                  return NewTaskCard();
-                },
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: 10);
-                },
-                itemCount: 10,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class NewTaskCard extends StatelessWidget {
   const NewTaskCard({super.key});
 
@@ -53,17 +18,14 @@ class NewTaskCard extends StatelessWidget {
             Row(
               children: [
                 Chip(
-                  backgroundColor: Colors.green,
+                  backgroundColor: Colors.cyan,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(15),
                       bottomLeft: Radius.circular(8),
                     ),
                   ),
-                  label: Text(
-                    'Complete',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  label: Text('New', style: TextStyle(color: Colors.white)),
                 ),
                 Spacer(),
                 IconButton(
