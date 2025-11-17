@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:task_manager_app/ui/pages/update_profile_screen.dart';
 
 class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
-  const AppbarWidget({super.key});
-
+  const AppbarWidget({super.key, this.updateProfile = false});
+  final bool updateProfile;
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -14,6 +14,10 @@ class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.green,
       title: GestureDetector(
         onTap: () {
+          ///this updateProfile used only don't have update profile clickable///
+          if (updateProfile) {
+            return;
+          }
           Navigator.pushNamed(context, UpdateProfileScreen.name);
         },
         child: Row(

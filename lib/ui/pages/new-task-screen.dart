@@ -35,6 +35,7 @@ class _NewTaskListScreenNState extends State<NewTaskListScreenN> {
                 itemCount: 10,
               ),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
