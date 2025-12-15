@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 
 class NetworkClient {
-  Future<NetworkResponse> getRequest(String url) async {
+  static Future<NetworkResponse> getRequest(String url) async {
     try {
       Uri uri = Uri.parse(url);
       logRequest(url);
@@ -21,6 +21,7 @@ class NetworkClient {
         return NetworkResponse(
           isSuccess: false,
           responseCode: response.statusCode,
+          errorMessage: decodedData['data'],
         );
       }
     } catch (e) {
@@ -32,10 +33,10 @@ class NetworkClient {
     }
   }
 
-  Future<NetworkResponse> postRequest(
-    String url,
+  static Future<NetworkResponse> postRequest(
+    String url, {
     Map<String, dynamic>? body,
-  ) async {
+  }) async {
     try {
       Uri uri = Uri.parse(url);
       logRequest(url, body: body);
@@ -56,6 +57,7 @@ class NetworkClient {
         return NetworkResponse(
           isSuccess: false,
           responseCode: response.statusCode,
+          errorMessage: decodedData['data'],
         );
       }
     } catch (e) {
@@ -67,14 +69,14 @@ class NetworkClient {
     }
   }
 
-  void logRequest(String url, {Map<String, dynamic>? body}) {
+  static void logRequest(String url, {Map<String, dynamic>? body}) {
     debugPrint(
       "url: $url\n"
       "body: $body",
     );
   }
 
-  void logResponse(String url, Response response) {
+  static void logResponse(String url, Response response) {
     debugPrint(
       "response: $response\n"
       "body response: ${response.body}\n"
@@ -87,12 +89,12 @@ class NetworkResponse {
   final bool isSuccess;
   final int responseCode;
   final dynamic body;
-  final String? errorMessage;
+  final String errorMessage;
 
   NetworkResponse({
     required this.isSuccess,
     required this.responseCode,
     this.body,
-    this.errorMessage,
+    this.errorMessage = 'Something went wrong!',
   });
 }
