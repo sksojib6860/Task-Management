@@ -29,85 +29,104 @@ class _SigninScreenState extends State<SigninScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ScreenBackground(
-        child: Padding(
-          padding: const EdgeInsets.all(26.0),
-          child: Form(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 8,
-              children: [
-                const SizedBox(height: 60),
-                Text(
-                  'Get Started With',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 8),
-                TextFormField(
-                  validator: (String? value) {
-                    if (value?.trim().isEmpty ?? true) {
-                      return 'Email is required';
-                    }
-                    if (EmailValidator.validate(value!) == false) {
-                      return 'Enter your valid email address';
-                    }
-                    return null;
-                  },
-                  controller: _emailctr,
-                  decoration: InputDecoration(hintText: 'Email'),
-                ),
-                TextFormField(
-                  validator: (String? value) {
-                    if (value?.trim().isEmpty ?? true) {
-                      return 'Password is required';
-                    }
-                    if (value!.length < 6) {
-                      return "Password can't be less than 6 characters";
-                    }
-                    return null;
-                  },
-                  controller: _passwardctr,
-                  decoration: InputDecoration(hintText: 'Password'),
-                ),
-                const SizedBox(height: 8),
-                Visibility(
-                  visible: _signInProgress == false,
-                  replacement: Center(child: CircularProgressIndicator()),
-                  child: FilledButton(
-                    onPressed: onTapSignIn,
-                    child: Icon(Icons.arrow_circle_right_outlined),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(26.0),
+            child: Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              key: _formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 8,
+                children: [
+                  const SizedBox(height: 60),
+                  Text(
+                    'Get Started With',
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
-                ),
-                const SizedBox(height: 8),
-                Center(
-                  child: Column(
-                    children: [
-                      TextButton(
-                        onPressed: onTapForgotPassword,
-                        child: Text(
-                          'Forget Password',
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          text: "Don't have an account? ",
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          children: [
-                            TextSpan(
-                              text: 'Sign Up',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = onTapSignUp,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  const SizedBox(height: 8),
+                  TextFormField(
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Email is required';
+                      }
+                      if (EmailValidator.validate(value!) == false) {
+                        return 'Enter your valid email address';
+                      }
+                      return null;
+                    },
+                    controller: _emailctr,
+                    decoration: InputDecoration(hintText: 'Email'),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 8),
+                  TextFormField(
+                    obscureText: true,
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Password is required';
+                      }
+                      if (value!.length < 6) {
+                        return "Password can't be less than 6 characters";
+                      }
+                      return null;
+                    },
+                    controller: _passwardctr,
+                    decoration: InputDecoration(hintText: 'Password'),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Replace the old Visibility + centered loader with an in-button loader.
+                  SizedBox(
+                    height: 48,
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: _signInProgress ? null : onTapSignIn,
+                      child: _signInProgress
+                          ? SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2.2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Theme.of(context).colorScheme.onPrimary,
+                                ),
+                              ),
+                            )
+                          : Icon(Icons.arrow_circle_right_outlined),
+                    ),
+                  ),
+
+                  const SizedBox(height: 8),
+                  Center(
+                    child: Column(
+                      children: [
+                        TextButton(
+                          onPressed: onTapForgotPassword,
+                          child: Text(
+                            'Forget Password',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            text: "Don't have an account? ",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            children: [
+                              TextSpan(
+                                text: 'Sign Up',
+                                style: Theme.of(context).textTheme.bodyLarge,
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = onTapSignUp,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
