@@ -2,13 +2,17 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
+import 'package:task_manager_app/ui/controllers/auth_controller.dart';
 
 class NetworkClient {
   static Future<NetworkResponse> getRequest(String url) async {
     try {
       Uri uri = Uri.parse(url);
       logRequest(url);
-      Response response = await get(uri);
+      Response response = await get(
+        uri,
+        headers: {'token': AuthController.accessToken ?? ''},
+      );
       logResponse(url, response);
       final decodedData = jsonDecode(response.body);
       if (response.statusCode == 200) {
@@ -42,7 +46,10 @@ class NetworkClient {
       logRequest(url, body: body);
       Response response = await post(
         uri,
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'token': AuthController.accessToken ?? '',
+        },
         body: jsonEncode(body),
       );
       logResponse(url, response);

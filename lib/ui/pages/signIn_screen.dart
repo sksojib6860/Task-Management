@@ -157,21 +157,38 @@ class _SigninScreenState extends State<SigninScreen> {
       "password": _passwardctr.text,
     };
 
-    final NetworkResponse response = await NetworkClient.postRequest(
-      Urls.loginUrl,
-      body: requestBody,
-    );
-    if (response.isSuccess) {
-      UserModel userModel = UserModel.fromJson(response.body['data']);
-      String accessToken = response.body['token'];
-      await AuthController.saveUserData(accessToken, userModel);
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        NavigationBarScreen.name,
-        (predicate) => false,
+    try {
+      final NetworkResponse response = await NetworkClient.postRequest(
+        Urls.loginUrl,
+        body: requestBody,
       );
-    } else {
-      showSnackBarMessage(context, response.errorMessage);
+      if (response.isSuccess) {
+        UserModel userModel = UserModel.fromJson(response.body['data']);
+        String accessToken = response.body['token'];
+        await AuthController.saveUserData(accessToken, userModel);
+
+        // reset progress before navigating away for safety
+        _signInProgress = false;
+        setState(() {});
+
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          NavigationBarScreen.name,
+          (predicate) => false,
+        );
+        return;
+      } else {
+        // show server-provided error message
+        showSnackBarMessage(context, response.errorMessage);
+      }
+    } catch (e) {
+      showSnackBarMessage(context, 'An error occurred. Please try again.');
+    } finally {
+      // ensure progress is stopped in every case
+      if (mounted) {
+        _signInProgress = false;
+        setState(() {});
+      }
     }
   }
 }
